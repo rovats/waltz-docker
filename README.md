@@ -1,5 +1,5 @@
 # Docker Dev/Build/Run Tools for [Waltz](https://github.com/finos/waltz)
-- [0: Tools Required](#t0-ools-required)
+- [0: Tools Required](#0-tools-required)
   * [To Build/Run Waltz](#to-buildrun-waltz)
   * [To Develop](#to-develop)
 - [1: Create Database](#1-create-database)
