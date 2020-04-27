@@ -1,5 +1,5 @@
 # Docker Dev/Build/Run Tools for [Waltz](https://github.com/finos/waltz)
-- [Tools Required](#tools-required)
+- [0: Tools Required](#tools-required)
   * [To Build/Run Waltz](#to-build-run-waltz)
   * [To Develop](#to-develop)
 - [1: Create Database](#create-database)
@@ -16,9 +16,11 @@
     + [Docker](#docker)
 ---
 
-# Tools Required
+# 0: Tools Required
 ## To Build/Run Waltz
-Just [Docker](https://www.docker.com/products/docker-desktop)
+* [Docker](https://www.docker.com/products/docker-desktop)
+* *Optional*: A Postgres (recommended) or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
+* *Optional*: A servlet app server like Tomcat (if a standalone server is required instead of one running in a Docker container)
 
 ## To Develop
 Coming soon
