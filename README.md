@@ -44,7 +44,7 @@ Create Waltz database maven profiles under `config/maven/settings.xml`
 
 >If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
 >
->See instructions in the database `README.md` file to find database container IP addresses.
+>See instructions here [Waltz Postgres DB](database/postgres/README.md) or [Waltz MSSQL DB](database/mssql/README.md) on how to find database container IP addresses.
 
 The file can also be used for other custom maven settings.
 
