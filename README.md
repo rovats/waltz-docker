@@ -73,7 +73,7 @@ Create environment specific logback config files (`waltz-logback-<env>.xml`) und
 >You can also create files for other envirnoments like `waltz-logback-dev.xml`, `waltz-logback-uat.xml`, `waltz-logback-prod.xml`, depending on how many environments you have.
 
 ## Step 3: Run
-### External Server
+### Standard Deployment (.war on Tomcat)
 If you already have an app server like Tomcat set up, you can extract the required artificats from the docker build image `waltz-build` and deploy them in your server:
 
 **Template docker command**:
