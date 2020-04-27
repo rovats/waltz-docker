@@ -6,13 +6,13 @@
   * [PostgreSQL](#postgresql)
   * [MS SQL Server](#ms-sql-server)
 - [2: Build Waltz](#build-waltz)
-  * [Step 1: Setup Maven Profiles](#step-1--setup-maven-profiles)
-  * [Step 2: Trigger Build](#step-2--trigger-build)
+  * [Step 1: Setup Maven Profiles](#step-1-setup-maven-profiles)
+  * [Step 2: Trigger Build](#step-2-trigger-build)
 - [3: Run Waltz](#run-waltz)
-  * [Step 1: Create Waltz Properties File](#step-1--create-waltz-properties-file)
-  * [Step 2: Create Waltz Logback Config File](#step-2--create-waltz-logback-config-file)
+  * [Step 1: Create Waltz Properties File](#step-1-create-waltz-properties-file)
+  * [Step 2: Create Waltz Logback Config File](#step-2-create-waltz-logback-config-file)
   * [Step 3: Run](#step-3--run)
-    + [Standard Deployment (.war on Tomcat)](#standard-deployment--war-on-tomcat-)
+    + [Standard Deployment (.war on Tomcat)](#standard-deployment-war-on-tomcat)
     + [Docker](#docker)
 ---
 
