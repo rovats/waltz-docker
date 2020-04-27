@@ -1,0 +1,28 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+                      https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <profiles>
+        <!--
+        these profile are used to provide db connection details
+        so that the jOOQ code generator can run.
+        -->
+        <profile>
+            <id>local-postgres</id>
+            <properties>
+                <database.url>jdbc:postgresql://localhost:5432/waltz</database.url>
+                <database.user>waltz</database.user>
+                <database.password>waltz</database.password>
+                <database.schema>public</database.schema>
+            </properties>
+        </profile>
+        <profile>
+            <id>local-mssql</id>
+            <properties>
+                <database.url>jdbc:sqlserver://localhost:1433;databaseName=waltz</database.url>
+                <database.user>waltz</database.user>
+                <database.password>waltz</database.password>
+                <database.schema>dbo</database.schema>
+                <database.catalog>watlz</database.catalog> <!-- only req'd for code gen w/ mssql -->
+            </properties>
+        </profile>
+    </profiles>
+</settings>
