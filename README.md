@@ -1,3 +1,21 @@
+# Docker Dev/Build/Run Tools for [Waltz](https://github.com/finos/waltz)
+- [Tools Required](#tools-required)
+  * [To Build/Run Waltz](#to-build-run-waltz)
+  * [To Develop](#to-develop)
+- [1: Create Database](#create-database)
+  * [PostgreSQL](#postgresql)
+  * [MS SQL Server](#ms-sql-server)
+- [2: Build Waltz](#build-waltz)
+  * [Step 1: Setup Maven Profiles](#step-1--setup-maven-profiles)
+  * [Step 2: Trigger Build](#step-2--trigger-build)
+- [3: Run Waltz](#run-waltz)
+  * [Step 1: Create Waltz Properties File](#step-1--create-waltz-properties-file)
+  * [Step 2: Create Waltz Logback Config File](#step-2--create-waltz-logback-config-file)
+  * [Step 3: Run](#step-3--run)
+    + [Standard Deployment (.war on Tomcat)](#standard-deployment--war-on-tomcat-)
+    + [Docker](#docker)
+---
+
 # Tools Required
 ## To Build/Run Waltz
 Just [Docker](https://www.docker.com/products/docker-desktop)
@@ -5,7 +23,7 @@ Just [Docker](https://www.docker.com/products/docker-desktop)
 ## To Develop
 Coming soon
 
-# Create Database
+# 1: Create Database
 Create a Waltz database if you don't already have one.
 
 ## PostgreSQL
@@ -17,7 +35,7 @@ If using an existing database server, create a new empty database, if you don't 
 ## MS SQL Server
 Coming soon
 
-# Build Waltz
+# 2: Build Waltz
 ## Step 1: Setup Maven Profiles
 Create a new `settings.xml` file under `config/maven/` (you can copy from `settings.sample.xml`)  
 Create Waltz database maven profiles under `config/maven/settings.xml`
@@ -51,7 +69,7 @@ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,
 # coming soon
 ```
 
-# Run Waltz
+# 3: Run Waltz
 You need the following to run Waltz:
 
 * Waltz runtime properties file: `waltz.properties`
