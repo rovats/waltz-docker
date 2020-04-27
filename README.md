@@ -11,7 +11,7 @@
 - [3: Run Waltz](#3-run-waltz)
   * [Step 1: Create Waltz Properties File](#step-1-create-waltz-properties-file)
   * [Step 2: Create Waltz Logback Config File](#step-2-create-waltz-logback-config-file)
-  * [Step 3: Run](#step-3--run)
+  * [Step 3: Run](#step-3-run)
     + [Standard Deployment (.war on Tomcat)](#standard-deployment-war-on-tomcat)
     + [Docker](#docker)
 ---
