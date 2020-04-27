@@ -49,7 +49,7 @@ Create Waltz database maven profiles under `config/maven/settings.xml`
 The file can also be used for other custom maven settings.
 
 ## Step 2: Trigger Build
-Built using `build/build.Dockerfile` 
+Built using [build/build.Dockerfile](build/build.Dockerfile)
 
 **Template docker command**:
 ```sh
