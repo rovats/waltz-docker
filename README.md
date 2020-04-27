@@ -1,3 +1,10 @@
+# Tools Required
+## To Build/Run Waltz
+Just [Docker](https://www.docker.com/products/docker-desktop)
+
+## To Develop
+Coming soon
+
 # Create Database
 Create a Waltz database if you don't already have one.
 
@@ -27,13 +34,17 @@ Built using `build/build.Dockerfile`
 **Template docker command**:
 ```sh
 # specify maven profiles as an argument (mandatory)
+# waltz rolls out database ddl changes are part of the build process (via liquibase), so it is important to 
+# build against your correct target database.
+# eg: You need to run builds against your Dev/UAT/Prod databases separately, unless you are manually
+#     deploying liquibase changes to these databases
 
 docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
 **Examples**:
 ```sh
-# postgres
+# postgres using local-postgres maven profile
 docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
 
 # mssql
