@@ -1,0 +1,8 @@
+database.url=jdbc:postgresql://localhost:5432/waltz
+database.user=waltz
+database.password=waltz
+database.driver=org.postgresql.Driver
+jooq.dialect=POSTGRES
+
+waltz.from.email=waltz@waltz.com
+waltz.base.url=http://localhost:8080

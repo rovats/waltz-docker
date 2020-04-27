@@ -23,3 +23,7 @@ database/**/data/**
 config/maven/**
 config/waltz/**
 !config/**/*sample*
+
+# Build Output
+build/output/**
+!build/output/README.md

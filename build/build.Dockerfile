@@ -60,7 +60,24 @@ RUN mvn clean package -P${maven_profiles} -Dexec.skip=true -DskipTests=${skip_te
 #
 FROM alpine:latest as build_output
 
+# to derive output war file name
+ARG maven_profiles
+
 WORKDIR /waltz-bin
 
 # copy build output
 COPY --from=waltz_build /waltz-src/waltz-web/target/waltz-web.war .
+# copy config files
+COPY config/waltz/waltz-logback-*.xml ./config/
+COPY config/waltz/waltz-*.properties ./config/
+
+# copy artifact extract file
+COPY build/extract-artifacts.sh .
+RUN chmod +x ./extract-artifacts.sh
+
+ENV WALTZ_ENV=local
+ENV WALTZ_TARGET_DB=${maven_profiles}
+
+RUN mkdir /waltz-build-output
+
+CMD ["./extract-artifacts.sh"]

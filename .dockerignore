@@ -1,0 +1,11 @@
+# Git
+.git
+
+# Misc
+.DS_Store
+
+# Database files
+database/**/data/**
+
+# Build Output Files
+build/output/**

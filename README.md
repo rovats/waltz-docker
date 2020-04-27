@@ -4,34 +4,35 @@ Create a Waltz database if you don't already have one.
 ## PostgreSQL
 If using an existing database server, create a new empty database, if you don't already have a Waltz database.
 
-To run a containerised database server, see instructions here: [Containerised Waltz Postgres DB](database/postgres/README.md)
+>To run a containerised database server, see instructions here: [Containerised Waltz Postgres DB](database/postgres/README.md)
 
 
 ## MS SQL Server
 Coming soon
 
-# Setup Maven Profiles
-Create a new `settings.xml` file under `config/maven/` (you can copy from `settings.sample.xml`)
+# Build Waltz
+## Step 1: Setup Maven Profiles
+Create a new `settings.xml` file under `config/maven/` (you can copy from `settings.sample.xml`)  
 Create Waltz database maven profiles under `config/maven/settings.xml`
 
-If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.
-See instructions in the database `README.md` files to find database container IP addresses.
+>If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
+>
+>See instructions in the database `README.md` file to find database container IP addresses.
 
 The file can also be used for other custom maven settings.
 
-# Build Waltz
+## Step 2: Trigger Build
 Built using `build/build.Dockerfile` 
 
-Template command
-```
+**Template docker command**:
+```sh
 # specify maven profiles as an argument (mandatory)
-# see below for a complete list of arguments
 
 docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
-Examples
-```
+**Examples**:
+```sh
 # postgres
 docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
 
@@ -42,5 +43,47 @@ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,
 # Run Waltz
 You need the following to run Waltz:
 
-* Waltz war file
-* Waltz runtime property file: `waltz.properties`
+* Waltz runtime properties file: `waltz.properties`
+* Waltz logback config file: `waltz-logback.xml`
+* Waltz war file: `waltz-web.war`
+
+## Step 1: Create Waltz Properties File
+Create environment specific property files (`waltz-<env>.properties`) under `config/waltz` (you can copy from `config/waltz/waltz.properties.sample`)
+
+>The default environment is `local`, so at minimum, create `waltz-local.properties`  
+>
+>You can also create files for other envirnoments like `waltz-dev.properties`, `waltz-uat.properties`, `waltz-prod.properties`, depending on how many environments you have.
+
+## Step 2: Create Waltz Logback Config File
+Create environment specific logback config files (`waltz-logback-<env>.xml`) under `config/waltz` (you can copy from `config/waltz/waltz-logback.xml.sample`)
+
+>The default environment is `local`, so at minimum, create `waltz-logback-local.xml`  
+>
+>You can also create files for other envirnoments like `waltz-logback-dev.xml`, `waltz-logback-uat.xml`, `waltz-logback-prod.xml`, depending on how many environments you have.
+
+## Step 3: Run
+### External Server
+If you already have a app server like Tomcat running, you can extract the required artificats from the docker build image `waltz-build` and deploy them in your server:
+
+**Template docker command**:
+```sh
+# specify target environment and db
+docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
+```
+
+**Examples**:
+```sh
+# local env and postgres db
+docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
+
+# dev environment and mssql db
+docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
+```
+The above command will copy the deployment artifacts to `build/output` directory.
+
+>Depending on how your server is configured, the artifacts may be deployed on Tomcat like so:  
+>The `.war` file can be placed under Tomcat's `webapps` directory. 
+>The `waltz.properties` and `waltz-logback.xml` files need to be on the classpath, so they can be dropped into the server's `lib` folder.  
+
+### Docker
+coming soon
