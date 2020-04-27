@@ -82,7 +82,7 @@ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_
 The above command will copy the deployment artifacts to `build/output` directory.
 
 >Depending on how your server is configured, the artifacts may be deployed on Tomcat like so:  
->The `.war` file can be placed under Tomcat's `webapps` directory. 
+>The `.war` file can be placed under Tomcat's `webapps` directory.  
 >The `waltz.properties` and `waltz-logback.xml` files need to be on the classpath, so they can be dropped into the server's `lib` folder.  
 
 ### Docker
