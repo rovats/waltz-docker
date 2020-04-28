@@ -3,7 +3,7 @@
 The command below can be used to spin up a Postgres database server instance for use with Waltz.  
 While this is sufficient for dev/demo instances, it is recommended that you follow the official Postgres documentation to set up your database server for production to ensure your data is safe.
 
-Set the default username and password using environment variables as in the command below.
+Set the default username and password using environment variables as in the command below.  
 `POSTGRES_DB` is set to `waltz`, so that the default database created by Postgres is named as `waltz`.
 
 More information on running Postgres in a Docker container can be found here: [Postgres Docker Official Documentation](https://hub.docker.com/_/postgres)
