@@ -71,6 +71,9 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 # coming soon
 ```
 
+This will take several minutes to run, especially the first time, as required dependencies are downloaded.  
+Once complete, you can either extract the deployable artifacts to deploy them onto an external app server, or spin up a docker container to run Waltz, see below for instructions on both methods.
+
 # 3: Run Waltz
 You need the following to run Waltz:
 
