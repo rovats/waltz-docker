@@ -8,7 +8,7 @@ Local data directory: `database/postgres/data` (specified in the `-v` option bel
 
 [user@machine:waltz-docker]$ docker run -d --rm \
 --name waltz-db-postgres \
--v "$(pwd)"/database/postgres/data:/var/lib/postgresql/data \
+-v "$PWD"/database/postgres/data:/var/lib/postgresql/data \
 -e POSTGRES_USER=waltz \
 -e POSTGRES_PASSWORD=waltz \
 -e POSTGRES_DB=waltz \
