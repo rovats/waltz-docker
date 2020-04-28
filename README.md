@@ -59,13 +59,13 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 # eg: You need to run builds against your Dev/UAT/Prod databases separately, unless you are manually
 #     deploying liquibase changes to these databases
 
-[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
+[waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
 **Examples**:
-```bash
+```console
 # postgres using local-postgres maven profile
-[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
+[waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
 
 # mssql
 # coming soon
@@ -97,18 +97,18 @@ Create environment specific logback config files (`waltz-logback-<env>.xml`) und
 If you already have an app server like Tomcat set up, you can extract the required artificats from the docker build image `waltz-build` and deploy them in your server:
 
 **Template docker command**:
-```sh
+```console
 # specify target environment and db
-[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
+[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
 ```
 
 **Examples**:
-```sh
+```console
 # local env and postgres db
-docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
+[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
 
 # dev environment and mssql db
-docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
+[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
 ```
 The above command will copy the deployment artifacts to `build/output` directory.
 
