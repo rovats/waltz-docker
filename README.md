@@ -52,20 +52,20 @@ The file can also be used for other custom maven settings.
 Built using [build/build.Dockerfile](build/build.Dockerfile)
 
 **Template docker command**:
-```sh
+```console
 # specify maven profiles as an argument (mandatory)
 # waltz rolls out database ddl changes are part of the build process (via liquibase), so it is important to 
 # build against your correct target database.
 # eg: You need to run builds against your Dev/UAT/Prod databases separately, unless you are manually
 #     deploying liquibase changes to these databases
 
-docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
+[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
 **Examples**:
-```sh
+```bash
 # postgres using local-postgres maven profile
-docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
+[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
 
 # mssql
 # coming soon
@@ -99,7 +99,7 @@ If you already have an app server like Tomcat set up, you can extract the requir
 **Template docker command**:
 ```sh
 # specify target environment and db
-docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
+[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
 ```
 
 **Examples**:
