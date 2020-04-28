@@ -59,13 +59,13 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 # eg: You need to run builds against your Dev/UAT/Prod databases separately, unless you are manually
 #     deploying liquibase changes to these databases
 
-[:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
+[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
 **Examples**:
 ```console
 # postgres using local-postgres maven profile
-[waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
+[user@machine:waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=waltz-postgres,local-postgres -f build/build.Dockerfile .
 
 # mssql
 # coming soon
@@ -99,16 +99,16 @@ If you already have an app server like Tomcat set up, you can extract the requir
 **Template docker command**:
 ```console
 # specify target environment and db
-[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
+[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
 ```
 
 **Examples**:
 ```console
 # local env and postgres db
-[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
+[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
 
 # dev environment and mssql db
-[waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
+[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
 ```
 The above command will copy the deployment artifacts to `build/output` directory.
 
