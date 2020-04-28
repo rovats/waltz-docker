@@ -59,7 +59,7 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 # eg: You need to run builds against your Dev/UAT/Prod databases separately, unless you are manually
 #     deploying liquibase changes to these databases
 
-[waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
+[/waltz-docker]$ docker build --tag waltz-build:latest --build-arg maven_profiles=<profiles> -f build/build.Dockerfile .
 ```
 
 **Examples**:
