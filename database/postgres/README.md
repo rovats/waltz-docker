@@ -1,14 +1,18 @@
 ## Run a Containerised Postgres Server for Waltz 
 
-Data will be persisted between container restarts.  
-Local data directory: `database/postgres/data` (specified in the `-v` option below).
+The command below can be used to spin up a Postgres database server instance for use with Waltz. 
+While this is sufficient for dev/demo instances, it is recommended that you follow the official Postgres documentation to set up your database server for production to ensure your data is safe.
+
+Set the default username and password using environment variables as in the command below.
+`POSTGRES_DB` is set to `waltz`, so that the default database created by Postgres is named as `waltz`.
+
+More information on running Postgres in a Docker container can be found here: [Postgres Docker Official Documentation](https://hub.docker.com/_/postgres)
 
 ```console
-# run the container in the background
+# run the database container in the background
 
-[user@machine:waltz-docker]$ docker run -d --rm \
+[user@machine:waltz-docker]$ docker run -d \
 --name waltz-db-postgres \
--v "$PWD"/database/postgres/data:/var/lib/postgresql/data \
 -e POSTGRES_USER=waltz \
 -e POSTGRES_PASSWORD=waltz \
 -e POSTGRES_DB=waltz \
