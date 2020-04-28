@@ -102,16 +102,16 @@ If you already have an app server like Tomcat set up, you can extract the requir
 **Template docker command**:
 ```console
 # specify target environment and db
-[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
+[user@machine:waltz-docker]$ docker run --rm -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=<env> -e WALTZ_TARGET_DB=<target-db> waltz-build:latest
 ```
 
 **Examples**:
 ```console
 # local env and postgres db
-[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
+[user@machine:waltz-docker]$ docker run --rm -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=local -e WALTZ_TARGET_DB=postgres waltz-build:latest
 
 # dev environment and mssql db
-[user@machine:waltz-docker]$ docker run -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
+[user@machine:waltz-docker]$ docker run --rm -v "$PWD"/build/output:/waltz-build-output -e WALTZ_ENV=dev -e WALTZ_TARGET_DB=mssql waltz-build:latest
 ```
 The above command will copy the deployment artifacts to `build/output` directory.
 
@@ -120,4 +120,14 @@ The above command will copy the deployment artifacts to `build/output` directory
 >The `waltz.properties` and `waltz-logback.xml` files need to be on the classpath, so they can be dropped into the server's `lib` folder.  
 
 ### Docker
-coming soon
+details coming soon
+
+```console
+[user@machine:waltz-docker]$ docker build --tag waltz-run:latest --build-arg waltz_build_tag=latest --build-arg waltz_env=local -f run/run.Dockerfile .
+
+[user@machine:waltz-docker]$ docker run --rm -it --name waltz-run -it -p 8888:8080 waltz-run:latest
+
+http://localhost:8888/waltz/
+```
+
+details coming soon
