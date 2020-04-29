@@ -6,8 +6,14 @@ FROM alpine/git as code_checkout
 # specify these using --build-arg these to use a different url/branch(or tag) to build from
 ARG git_url=https://github.com/finos/waltz.git
 ARG git_branch=master
+ARG cache_bust_url=https://api.github.com/repos/finos/waltz/commits/${git_branch}
 
 WORKDIR /waltz-src
+
+# ensure new code is fetched if anything has changed
+ADD ${cache_bust_url} /tmp/cache_bust
+
+# fetch code
 RUN git clone --single-branch --branch ${git_branch} ${git_url} .
 
 
