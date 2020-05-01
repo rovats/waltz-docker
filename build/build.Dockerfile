@@ -42,7 +42,8 @@ FROM openjdk:8 as waltz_build
 
 RUN apt-get update && apt-get install -y \
     maven \
-    git
+    git \
+    xsltproc
 
 # mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
 ARG maven_profiles
@@ -50,6 +51,14 @@ ARG skip_tests=true
 
 # copy custom maven settings
 COPY ./config/maven/settings.xml /etc/maven
+
+WORKDIR /waltz-tmp
+
+# cache maven dependencies
+COPY build/transform-main-pom.xsl /tmp/
+COPY --from=code_checkout /waltz-src/pom.xml /tmp/main-pom.xml
+RUN xsltproc -o ./pom.xml /tmp/transform-main-pom.xsl /tmp/main-pom.xml
+RUN mvn dependency:go-offline
 
 WORKDIR /waltz-src
 

@@ -138,10 +138,13 @@ The above command will copy the deployment artifacts to `build/output` directory
 >The `waltz.properties` and `waltz-logback.xml` files need to be on the classpath, so they can be dropped into the server's `lib` folder.  
 
 ### Docker
-details coming soon
 
 ```console
+# build docker image to run Waltz (based on waltz-build image created above)
+
 [user@machine:waltz-docker]$ docker build --tag waltz-run:latest --build-arg waltz_build_tag=latest --build-arg waltz_env=local -f run/run.Dockerfile .
+
+# run Waltz in a dockerized Tomcat instance
 
 [user@machine:waltz-docker]$ docker run --rm -it --name waltz-run -it -p 8888:8080 waltz-run:latest
 

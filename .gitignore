@@ -6,6 +6,7 @@
 
 # Misc
 .DS_Store
+*.code-workspace
 
 # Package Files #
 *.jar
