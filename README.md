@@ -4,6 +4,7 @@
   * [To Develop](#to-develop)
 - [1: Create Database](#1-create-database)
   * [PostgreSQL](#postgresql)
+  * [MariaDB](#mariadb)
   * [MS SQL Server](#ms-sql-server)
 - [2: Build Waltz](#2-build-waltz)
   * [Step 1: Setup Maven Profiles](#step-1-setup-maven-profiles)
@@ -19,7 +20,7 @@
 # 0: Tools Required
 ## To Build/Run Waltz
 * [Docker](https://www.docker.com/products/docker-desktop)
-* *Optional*: A Postgres (recommended) or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
+* *Optional*: A Postgres (recommended), MariaDB or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
 * *Optional*: A servlet app server like Tomcat (if a standalone server is required instead of one running in a Docker container)
 
 ## To Develop
@@ -33,6 +34,10 @@ If using an existing database server, create a new empty database, if you don't 
 
 >To run a containerised database server, see instructions here: [Containerised Waltz Postgres DB](database/postgres/README.md)
 
+## MariaDB
+If using an existing database server, create a new empty database, if you don't already have a Waltz database.
+
+>To run a containerised database server, see instructions here: [Containerised Waltz MariaDB](database/mariadb/README.md)
 
 ## MS SQL Server
 Coming soon
@@ -44,7 +49,7 @@ Create Waltz database maven profiles under `config/maven/settings.xml`
 
 >If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
 >
->See instructions here [Waltz Postgres DB](database/postgres/README.md) or [Waltz MSSQL DB](database/mssql/README.md) on how to find database container IP addresses.
+>See instructions for [Waltz Postgres DB](database/postgres/README.md), [Waltz MariaDB](database/mariadb/README.md), or [Waltz MSSQL DB](database/mssql/README.md) on how to find database container IP addresses.
 
 The file can also be used for other custom maven settings.
 
@@ -60,9 +65,10 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 #     deploying liquibase changes to these databases
 
 [user@machine:waltz-docker]$ docker build \
---tag waltz-build:latest \
+--tag <image-name>:<image_tag> \
 --build-arg maven_profiles=<profiles> \
--f build/build.Dockerfile .;
+-f build/build.Dockerfile .
+
 ```
 
 **Examples**:
@@ -71,7 +77,13 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 [user@machine:waltz-docker]$ docker build \
 --tag waltz-build:latest \
 --build-arg maven_profiles=waltz-postgres,local-postgres \
--f build/build.Dockerfile .;
+-f build/build.Dockerfile .
+
+# mariadb using local-mariadb maven profile
+[user@machine:waltz-docker]$ docker build \
+--tag waltz-build:latest \
+--build-arg maven_profiles=waltz-mariadb,local-mariadb \
+-f build/build.Dockerfile .
 
 # mssql
 # coming soon
@@ -110,9 +122,11 @@ If you already have an app server like Tomcat set up, you can extract the requir
 # specify target environment and db
 [user@machine:waltz-docker]$ docker run --rm \
 -v "$PWD"/build/output:/waltz-build-output \
+-v "$PWD"/config/waltz:/waltz-bin/config \
 -e WALTZ_ENV=<env> \
 -e WALTZ_TARGET_DB=<target-db> \
-waltz-build:latest;
+<image_name>:<image_tag>
+
 ```
 
 **Examples**:
@@ -120,16 +134,27 @@ waltz-build:latest;
 # local env and postgres db
 [user@machine:waltz-docker]$ docker run --rm \
 -v "$PWD"/build/output:/waltz-build-output \
+-v "$PWD"/config/waltz:/waltz-bin/config \
 -e WALTZ_ENV=local \
 -e WALTZ_TARGET_DB=postgres \
-waltz-build:latest;
+waltz-build:latest
 
-# dev environment and mssql db
+# dev env and mariadb
 [user@machine:waltz-docker]$ docker run --rm \
 -v "$PWD"/build/output:/waltz-build-output \
+-v "$PWD"/config/waltz:/waltz-bin/config \
 -e WALTZ_ENV=dev \
+-e WALTZ_TARGET_DB=mariadb \
+waltz-build:latest
+
+# prod environment and mssql db
+[user@machine:waltz-docker]$ docker run --rm \
+-v "$PWD"/build/output:/waltz-build-output \
+-v "$PWD"/config/waltz:/waltz-bin/config \
+-e WALTZ_ENV=prod \
 -e WALTZ_TARGET_DB=mssql \
-waltz-build:latest;
+waltz-build:latest
+
 ```
 The above command will copy the deployment artifacts to `build/output` directory.
 

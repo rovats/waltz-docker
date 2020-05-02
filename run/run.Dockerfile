@@ -7,6 +7,10 @@ FROM waltz-build:${waltz_build_tag} as get_artifacts
 ARG waltz_env=local
 ARG context_path=waltz
 
+# copy config files
+COPY config/waltz/waltz-logback-*.xml ./config/
+COPY config/waltz/waltz-*.properties ./config/
+
 WORKDIR /waltz-deployment-artifacts
 
 RUN cp /waltz-bin/waltz-web.war ./${context_path}.war

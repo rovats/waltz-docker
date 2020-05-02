@@ -17,8 +17,11 @@
 *.tar.gz
 *.rar
 
-# Data
-database/**/data/**
+# Database config/init/script files
+database/mariadb/**
+database/mssql/**
+database/postgres/**
+!database/**/README.md
 
 # Config Files
 config/maven/**
@@ -28,3 +31,6 @@ config/waltz/**
 # Build Output
 build/output/**
 !build/output/README.md
+
+# Custom Scripts
+custom-scripts/**

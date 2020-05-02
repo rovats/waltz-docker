@@ -15,6 +15,15 @@
             </properties>
         </profile>
         <profile>
+            <id>local-mariadb</id>
+            <properties>
+                <database.url>jdbc:mysql://localhost:3306/waltz</database.url>
+                <database.user>waltz</database.user>
+                <database.password>waltz</database.password>
+                <database.schema>waltz</database.schema>
+            </properties>
+        </profile>
+        <profile>
             <id>local-mssql</id>
             <properties>
                 <database.url>jdbc:sqlserver://localhost:1433;databaseName=waltz</database.url>

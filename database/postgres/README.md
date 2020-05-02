@@ -51,9 +51,12 @@ postgres:10.6
 ### Connect to the Postgres Server SQL Client
 ```console
 # pass the username used when creating the DB in the -U option
+# docker exec -it <container_name> psql -d <db_name> -U <user_name>
 # use the password set above when prompted
 
-[user@machine:waltz-docker]$ docker exec -it waltz-db-postgres psql -U waltz
+[user@machine:waltz-docker]$ docker exec -it waltz-db-postgres psql -d waltz -U waltz
+or
+[user@machine:waltz-docker]$ docker exec -it waltz-db-postgres psql -d waltz -U postgres
 ```
 
 ### Find IP Address of the Postgres Server (to use in Maven settings.xml)

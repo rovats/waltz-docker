@@ -1,8 +1,22 @@
-database.url=jdbc:postgresql://localhost:5432/waltz
-database.user=waltz
-database.password=waltz
-database.driver=org.postgresql.Driver
-jooq.dialect=POSTGRES
-
+# common
 waltz.from.email=waltz@waltz.com
 waltz.base.url=http://localhost:8080
+
+#
+# database
+# uncomment one of these sets of properties depending on your database
+#
+
+# postgres
+#database.url=jdbc:postgresql://localhost:5432/waltz
+#database.user=waltz
+#database.password=waltz
+#database.driver=org.postgresql.Driver
+#jooq.dialect=POSTGRES
+
+# mariadb
+#database.url=jdbc:mysql://localhost:3306/waltz
+#database.user=waltz
+#database.password=waltz
+#database.driver=org.mariadb.jdbc.Driver
+#jooq.dialect=MARIADB
