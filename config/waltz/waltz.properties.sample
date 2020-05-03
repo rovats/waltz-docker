@@ -20,3 +20,12 @@ waltz.base.url=http://localhost:8080
 #database.password=waltz
 #database.driver=org.mariadb.jdbc.Driver
 #jooq.dialect=MARIADB
+
+# mssql
+#database.url=jdbc:sqlserver://localhost:1433;databaseName=waltz
+#database.user=waltz
+#database.password=waltz
+#database.driver=com.microsoft.sqlserver.jdbc.SQLServerDriver
+# jooq.dialect should match your MSSQL Version,
+# see jOOQ documentation: https://www.jooq.org/doc/3.13/manual/sql-building/dsl-context/sql-dialects/
+#jooq.dialect=SQLSERVER2017

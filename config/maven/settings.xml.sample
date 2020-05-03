@@ -30,7 +30,17 @@
                 <database.user>waltz</database.user>
                 <database.password>waltz</database.password>
                 <database.schema>dbo</database.schema>
-                <database.catalog>watlz</database.catalog> <!-- only req'd for code gen w/ mssql -->
+                <database.catalog>waltz</database.catalog> <!-- only req'd for code gen w/ mssql -->
+
+                <!-- this should match your MSSQL version -->
+                <jooq.dialect>SQLSERVER2017</jooq.dialect>
+
+                <!-- uncomment and use this if using jOOQ trial -->
+                <!--<jooq.group>org.jooq.trial-java-8</jooq.group> -->
+
+                <!-- uncomment and use this if your jOOQ version if different from the one in Waltz source code -->
+                <!-- this should match the version in your downloaded jOOQ Pro/Trial zip file (jOOQ-<version>.zip) -->
+                <!-- <jooq.version></jooq.version> -->
             </properties>
         </profile>
     </profiles>

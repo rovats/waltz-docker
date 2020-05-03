@@ -5,6 +5,8 @@ The command below can be used to spin up a MariaDB database server instance for 
 `MYSQL_DATABASE` is set to `waltz`, so that the default database created by MariaDB is named as `waltz`.
 Set username and password using environment variables (`MYSQL_USER`, `MYSQL_PASSWORD`) as in the command below to create a new user named `waltz`, which will be granted access to the `waltz` database.
 
+_Optional_: Use `-p 3306:3306` in the command to access your database server using the host machine's IP address.
+
 > By default, Docker manages data peristence by writing database files to disk on the host system. This is transparent to the user and data is preserved between container restarts (until the container is removed).  
 >
 > While this is sufficient for dev/test instances, it is recommended that you explore options like mounting directories onto the MariaDB docker container to store data, backups etc.
@@ -23,7 +25,6 @@ Set username and password using environment variables (`MYSQL_USER`, `MYSQL_PASS
 mariadb:10.4 \
 --character-set-server=utf8mb4 \
 --collation-server=utf8mb4_unicode_ci
-
 ```
 
 ### Connect to the MariaDB Server SQL Client

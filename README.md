@@ -21,6 +21,7 @@
 ## To Build/Run Waltz
 * [Docker](https://www.docker.com/products/docker-desktop)
 * *Optional*: A Postgres (recommended), MariaDB or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
+  * _[jOOQ Pro](https://www.jooq.org/download/)_ to build Waltz from source if using MSSQL
 * *Optional*: A servlet app server like Tomcat (if a standalone server is required instead of one running in a Docker container)
 
 ## To Develop
@@ -68,29 +69,65 @@ Built using [build/build.Dockerfile](build/build.Dockerfile)
 --tag <image-name>:<image_tag> \
 --build-arg maven_profiles=<profiles> \
 -f build/build.Dockerfile .
-
 ```
+This will take several minutes to run, especially the first time, as required dependencies are downloaded.  
+Once complete, you can either extract the deployable artifacts to deploy them onto an external app server, or spin up a docker container to run Waltz, see below for instructions on both methods.
 
+### Postgres and MariaDB
 **Examples**:
 ```console
-# postgres using local-postgres maven profile
+# postgres using 'local-postgres' maven profile defined in config/maven/settings.xml
 [user@machine:waltz-docker]$ docker build \
 --tag waltz-build:latest \
 --build-arg maven_profiles=waltz-postgres,local-postgres \
 -f build/build.Dockerfile .
 
-# mariadb using local-mariadb maven profile
+# mariadb using 'local-mariadb' maven profile defined in config/maven/settings.xml
 [user@machine:waltz-docker]$ docker build \
 --tag waltz-build:latest \
 --build-arg maven_profiles=waltz-mariadb,local-mariadb \
 -f build/build.Dockerfile .
-
-# mssql
-# coming soon
 ```
 
-This will take several minutes to run, especially the first time, as required dependencies are downloaded.  
-Once complete, you can either extract the deployable artifacts to deploy them onto an external app server, or spin up a docker container to run Waltz, see below for instructions on both methods.
+### MSSQL
+To build Waltz for MSSQL from source, a [jOOQ Pro](https://www.jooq.org/download/) licence is required.  
+jOOQ Pro maven dependencies need to be dowloaded and installed locally in maven repository.  
+
+**Download jOOQ Pro**   
+Download jOOQ Pro zip file (`jOOQ-<version>.zip`) from jOOQ website and copy the file to `config/maven` directory.  
+Ensure that the version matches the one specified in Waltz code [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml) (see `jooq.version` property).  
+
+> jOOQ provides a 30-day trial for jOOQ Pro, which may be used to build Waltz.  
+
+The build process will use this zip file to install jOOQ dependencies in the build container's maven repository.
+
+**Additional Maven Profile Properties**  
+The following additional properties may need to be specified for MSSQL profiles in your `config/maven/settings.xml` file:  
+* `jooq.group`: Set this to `org.jooq.trial-java-8` if using jOOQ trial version
+* `jooq.version`: If your version of jOOQ doesn't match the one in [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml). This can happen if using jOOQ trial, as that is only available for the latest jOOQ release.
+* `jooq.dialect`: Set this so that it matches your version of MSSQL. See (jOOQ Documentation)[https://www.jooq.org/doc/3.13/manual/sql-building/dsl-context/sql-dialects/] for details
+
+**Additional Build Argument**  
+An additional `jooq_pro_version` mandatory build argument needs to be passed for MSSQL builds, which should match the version in jOOQ Pro zip file (`jOOQ-<version>.zip`) under `config/maven` directory.  
+The build process uses this argument to find the correct zip file to install jOOQ dependencies.
+
+**Examples**
+```console
+# template
+docker build \
+--tag <image-name>:<image_tag> \
+--build-arg maven_profiles=<profiles> \
+--build-arg jooq_pro_version=<jooq-version> \
+-f build/build.Dockerfile .
+
+# mssql using 'local-mssql' maven profile defined in config/maven/settings.xml
+# and jOOQ version 3.13.1
+[user@machine:waltz-docker]$ docker build \
+--tag waltz-build:latest \
+--build-arg maven_profiles=waltz-mariadb,local-mariadb \
+--build-arg jooq_pro_version=3.13.1 \
+-f build/build.Dockerfile .
+```
 
 # 3: Run Waltz
 You need the following to run Waltz:
@@ -104,14 +141,14 @@ Create environment specific property files (`waltz-<env>.properties`) under `con
 
 >The default environment is `local`, so at minimum, create `waltz-local.properties`  
 >
->You can also create files for other envirnoments like `waltz-dev.properties`, `waltz-uat.properties`, `waltz-prod.properties`, depending on how many environments you have.
+>You can also create files for other environments like `waltz-dev.properties`, `waltz-uat.properties`, `waltz-prod.properties`, depending on how many environments you have.
 
 ## Step 2: Create Waltz Logback Config File
 Create environment specific logback config files (`waltz-logback-<env>.xml`) under `config/waltz` (you can copy from `config/waltz/waltz-logback.xml.sample`)
 
 >The default environment is `local`, so at minimum, create `waltz-logback-local.xml`  
 >
->You can also create files for other envirnoments like `waltz-logback-dev.xml`, `waltz-logback-uat.xml`, `waltz-logback-prod.xml`, depending on how many environments you have.
+>You can also create files for other environments like `waltz-logback-dev.xml`, `waltz-logback-uat.xml`, `waltz-logback-prod.xml`, depending on how many environments you have.
 
 ## Step 3: Run
 ### Standard Deployment (.war on Tomcat)
@@ -126,7 +163,6 @@ If you already have an app server like Tomcat set up, you can extract the requir
 -e WALTZ_ENV=<env> \
 -e WALTZ_TARGET_DB=<target-db> \
 <image_name>:<image_tag>
-
 ```
 
 **Examples**:
@@ -154,7 +190,6 @@ waltz-build:latest
 -e WALTZ_ENV=prod \
 -e WALTZ_TARGET_DB=mssql \
 waltz-build:latest
-
 ```
 The above command will copy the deployment artifacts to `build/output` directory.
 

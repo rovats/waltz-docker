@@ -48,6 +48,8 @@ RUN apt-get update && apt-get install -y \
 # mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
 ARG maven_profiles
 ARG skip_tests=true
+# mandatory param for MSSQL
+ARG jooq_pro_version
 
 # copy custom maven settings
 COPY ./config/maven/settings.xml /etc/maven
@@ -59,6 +61,15 @@ COPY build/transform-main-pom.xsl /tmp/
 COPY --from=code_checkout /waltz-src/pom.xml /tmp/main-pom.xml
 RUN xsltproc -o ./pom.xml /tmp/transform-main-pom.xsl /tmp/main-pom.xml
 RUN mvn dependency:go-offline
+
+# install jOOQ Pro dependencies if needed
+COPY ./config/maven/ .
+RUN if [ -r jOOQ-${jooq_pro_version}.zip ]; then \
+        unzip jOOQ-${jooq_pro_version}.zip && \
+        cd jOOQ-${jooq_pro_version} && \
+        chmod +x maven-install.sh && \
+        ./maven-install.sh; \
+    fi
 
 WORKDIR /waltz-src
 

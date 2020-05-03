@@ -5,6 +5,8 @@ The command below can be used to spin up a Postgres database server instance for
 Set the default username and password using environment variables as in the command below.  
 `POSTGRES_DB` is set to `waltz`, so that the default database created by Postgres is named as `waltz`.
 
+_Optional_: Use `-p 5432:5432` in the command to access your database server using the host machine's IP address.
+
 > By default, Docker manages data peristence by writing database files to disk on the host system. This is transparent to the user and data is preserved between container restarts (until the container is removed).  
 >
 > While this is sufficient for dev/test instances, it is recommended that you explore options like mounting directories onto the Postgres docker container to store data, backups etc.
@@ -20,7 +22,6 @@ Set the default username and password using environment variables as in the comm
 -e POSTGRES_PASSWORD=waltz \
 -e POSTGRES_DB=waltz \
 postgres:10.6
-
 ```
 
 ### Sample Data
@@ -45,7 +46,6 @@ Waltz maintainers provide sample data dumps for Postgres, which can be downloade
 -e POSTGRES_DB=waltz \
 -v "${PWD}"/database/postgres:/docker-entrypoint-initdb.d \
 postgres:10.6
-
 ```
 
 ### Connect to the Postgres Server SQL Client
