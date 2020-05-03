@@ -41,7 +41,10 @@ If using an existing database server, create a new empty database, if you don't 
 >To run a containerised database server, see instructions here: [Containerised Waltz MariaDB](database/mariadb/README.md)
 
 ## MS SQL Server
-Coming soon
+If using an existing database server, create a new empty database, if you don't already have a Waltz database.
+
+>To run a containerised database server, see instructions here: [Containerised Waltz MSSQL DB](database/mssql/README.md)
+
 
 # 2: Build Waltz
 ## Step 1: Setup Maven Profiles
