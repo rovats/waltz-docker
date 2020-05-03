@@ -56,6 +56,13 @@ COPY --from=code_checkout /waltz-src/pom.xml /tmp/main-pom.xml
 RUN xsltproc -o ./pom.xml /tmp/transform-main-pom.xsl /tmp/main-pom.xml
 RUN mvn dependency:go-offline
 
+# build args
+# mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
+ARG maven_profiles
+ARG skip_tests=true
+# mandatory param for MSSQL
+ARG jooq_pro_version
+
 # install jOOQ Pro dependencies if needed
 COPY ./config/maven/ .
 RUN if [ -r jOOQ-${jooq_pro_version}.zip ]; then \
@@ -64,13 +71,6 @@ RUN if [ -r jOOQ-${jooq_pro_version}.zip ]; then \
         chmod +x maven-install.sh && \
         ./maven-install.sh; \
     fi
-
-# build args
-# mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
-ARG maven_profiles
-ARG skip_tests=true
-# mandatory param for MSSQL
-ARG jooq_pro_version
 
 WORKDIR /waltz-src
 
