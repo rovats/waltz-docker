@@ -194,7 +194,7 @@ waltz-build:latest
 -e WALTZ_TARGET_DB=mssql \
 waltz-build:latest
 ```
-The above command will copy the deployment artifacts to `build/output` directory.
+The above command will copy the deployment artifacts to `build/output/${WALTZ_ENV}` directory.
 
 >Depending on how your server is configured, the artifacts may be deployed on Tomcat like so:  
 >The `.war` file can be placed under Tomcat's `webapps` directory.  

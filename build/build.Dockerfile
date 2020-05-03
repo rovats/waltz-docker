@@ -14,7 +14,7 @@ WORKDIR /waltz-src
 ADD ${cache_bust_url} /tmp/cache_bust
 
 # fetch code
-RUN git clone --single-branch --branch ${git_branch} ${git_url} .
+RUN git clone --single-branch --depth 1 --branch ${git_branch} ${git_url} .
 
 
 #
@@ -45,12 +45,6 @@ RUN apt-get update && apt-get install -y \
     git \
     xsltproc
 
-# mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
-ARG maven_profiles
-ARG skip_tests=true
-# mandatory param for MSSQL
-ARG jooq_pro_version
-
 # copy custom maven settings
 COPY ./config/maven/settings.xml /etc/maven
 
@@ -70,6 +64,13 @@ RUN if [ -r jOOQ-${jooq_pro_version}.zip ]; then \
         chmod +x maven-install.sh && \
         ./maven-install.sh; \
     fi
+
+# build args
+# mandatory param, eg: --build-arg maven_profiles=waltz-postgres,local-postgres
+ARG maven_profiles
+ARG skip_tests=true
+# mandatory param for MSSQL
+ARG jooq_pro_version
 
 WORKDIR /waltz-src
 

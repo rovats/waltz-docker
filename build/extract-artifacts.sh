@@ -1,4 +1,5 @@
 #!/bin/sh
-cp ./waltz-web.war /waltz-build-output/waltz-web.${WALTZ_TARGET_DB}.${WALTZ_ENV}.war
-cp ./config/waltz-${WALTZ_ENV}.properties /waltz-build-output/waltz.properties
-cp ./config/waltz-logback-${WALTZ_ENV}.xml /waltz-build-output/waltz-logback.xml
+mkdir -p /waltz-build-output/${WALTZ_ENV}
+cp ./waltz-web.war /waltz-build-output/${WALTZ_ENV}/waltz-web.${WALTZ_TARGET_DB}.war
+cp ./config/waltz-${WALTZ_ENV}.properties /waltz-build-output/${WALTZ_ENV}/waltz.properties
+cp ./config/waltz-logback-${WALTZ_ENV}.xml /waltz-build-output/${WALTZ_ENV}/waltz-logback.xml
