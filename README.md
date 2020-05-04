@@ -49,7 +49,7 @@ If using an existing database server, create a new empty database, if you don't 
 
 # 2: Build Waltz
 ## Step 1: Setup Maven Profiles
-Create a `settings.xml` file under `config/maven/` (you can copy from [config/maven/settings.sample.xml](config/maven/settings.sample.xml))  
+Create a `settings.xml` file under `config/maven/` (you can copy from [config/maven/settings.xml.sample](config/maven/settings.xml.sample))  
 Create Waltz database maven profiles under `config/maven/settings.xml`
 
 >If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
