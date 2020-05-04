@@ -34,3 +34,4 @@ build/output/**
 
 # Custom Scripts
 custom-scripts/**
+!custom-scripts/README.md
