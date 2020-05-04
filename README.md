@@ -49,7 +49,7 @@ If using an existing database server, create a new empty database, if you don't 
 
 # 2: Build Waltz
 ## Step 1: Setup Maven Profiles
-Create a new `settings.xml` file under `config/maven/` (you can copy from `settings.sample.xml`)  
+Create a `settings.xml` file under `config/maven/` (you can copy from [config/maven/settings.sample.xml](config/maven/settings.sample.xml))  
 Create Waltz database maven profiles under `config/maven/settings.xml`
 
 >If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
@@ -109,7 +109,7 @@ The build process will use this zip file to install jOOQ dependencies in the bui
 The following additional properties may need to be specified for MSSQL profiles in your `config/maven/settings.xml` file:  
 * `jooq.group`: Set this to `org.jooq.trial-java-8` if using jOOQ trial version
 * `jooq.version`: If your version of jOOQ doesn't match the one in [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml). This can happen if using jOOQ trial, as that is only available for the latest jOOQ release.
-* `jooq.dialect`: Set this so that it matches your version of MSSQL. See (jOOQ Documentation)[https://www.jooq.org/doc/3.13/manual/sql-building/dsl-context/sql-dialects/] for details
+* `jooq.dialect`: Set this so that it matches your version of MSSQL. See [jOOQ Documentation](https://www.jooq.org/doc/3.13/manual/sql-building/dsl-context/sql-dialects/) for details
 
 **Additional Build Argument**  
 An additional `jooq_pro_version` mandatory build argument needs to be passed for MSSQL builds, which should match the version in jOOQ Pro zip file (`jOOQ-<version>.zip`) under `config/maven` directory.  
@@ -141,14 +141,14 @@ You need the following to run Waltz:
 * Waltz war file: `waltz-web.war`
 
 ## Step 1: Create Waltz Properties File
-Create environment specific property files (`waltz-<env>.properties`) under `config/waltz` (you can copy from `config/waltz/waltz.properties.sample`)
+Create environment specific property files (`waltz-<env>.properties`) under `config/waltz` (you can copy from [config/waltz/waltz.properties.sample](config/waltz/waltz.properties.sample))
 
 >The default environment is `local`, so at minimum, create `waltz-local.properties`  
 >
 >You can also create files for other environments like `waltz-dev.properties`, `waltz-uat.properties`, `waltz-prod.properties`, depending on how many environments you have.
 
 ## Step 2: Create Waltz Logback Config File
-Create environment specific logback config files (`waltz-logback-<env>.xml`) under `config/waltz` (you can copy from `config/waltz/waltz-logback.xml.sample`)
+Create environment specific logback config files (`waltz-logback-<env>.xml`) under `config/waltz` (you can copy from [config/waltz/waltz-logback.xml.sample](config/waltz/waltz-logback.xml.sample))
 
 >The default environment is `local`, so at minimum, create `waltz-logback-local.xml`  
 >
