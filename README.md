@@ -20,6 +20,7 @@
 # 0: Tools Required
 ## To Build/Run Waltz
 * [Docker](https://www.docker.com/products/docker-desktop)
+* [Git](https://git-scm.com/downloads), to clone this repo. You can also download a zip, but cloning is recommended to easily pull in  future updates/fixes
 * *Optional*: A Postgres (recommended), MariaDB or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
   * _[jOOQ Pro](https://www.jooq.org/download/)_ to build Waltz from source if using MSSQL
 * *Optional*: A servlet app server like Tomcat (if a standalone server is required instead of one running in a Docker container)
