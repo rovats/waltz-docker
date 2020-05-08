@@ -27,7 +27,7 @@
 Coming soon
 
 # 1: Create Database
-## PostgreSQL, MariaDB or MSSQL
+## PostgreSQL, MariaDB or MS SQL Server
 If using an existing database server, create a new empty database, if you don't already have a Waltz database.
 
 Alternatively, to run a containerised database server, see instructions here:
