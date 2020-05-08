@@ -3,9 +3,7 @@
   * [To Build/Run Waltz](#to-buildrun-waltz)
   * [To Develop](#to-develop)
 - [1: Create Database](#1-create-database)
-  * [PostgreSQL](#postgresql)
-  * [MariaDB](#mariadb)
-  * [MS SQL Server](#ms-sql-server)
+  * [PostgreSQL, MariaDB or MS SQL Server](#postgresql-mariadb-or-ms-sql-server)
 - [2: Build Waltz](#2-build-waltz)
   * [Step 1: Setup Maven Profiles](#step-1-setup-maven-profiles)
   * [Step 2: Trigger Build](#step-2-trigger-build)
@@ -29,23 +27,13 @@
 Coming soon
 
 # 1: Create Database
-Create a Waltz database if you don't already have one.
-
-## PostgreSQL
+## PostgreSQL, MariaDB or MSSQL
 If using an existing database server, create a new empty database, if you don't already have a Waltz database.
 
->To run a containerised database server, see instructions here: [Containerised Waltz Postgres DB](database/postgres/README.md)
-
-## MariaDB
-If using an existing database server, create a new empty database, if you don't already have a Waltz database.
-
->To run a containerised database server, see instructions here: [Containerised Waltz MariaDB](database/mariadb/README.md)
-
-## MS SQL Server
-If using an existing database server, create a new empty database, if you don't already have a Waltz database.
-
->To run a containerised database server, see instructions here: [Containerised Waltz MSSQL DB](database/mssql/README.md)
-
+Alternatively, to run a containerised database server, see instructions here:
+* [Containerised Waltz Postgres DB](database/postgres/README.md) (also includes instructions for loading sample data)
+* [Containerised Waltz MariaDB](database/mariadb/README.md)
+* [Containerised Waltz MSSQL DB](database/mssql/README.md)
 
 # 2: Build Waltz
 ## Step 1: Setup Maven Profiles
@@ -59,7 +47,9 @@ Create Waltz database maven profiles under `config/maven/settings.xml`
 The file can also be used for other custom maven settings.
 
 ## Step 2: Trigger Build
-Built using [build/build.Dockerfile](build/build.Dockerfile)
+The build process downloads latest code from [finos/Waltz](https://github.com/finos/waltz) `master` branch by default.  
+This can be overriden by passing a different git url or branch/tag name.  
+See details of all available build arguments [here](build/README.md).
 
 **Template docker command**:
 ```console

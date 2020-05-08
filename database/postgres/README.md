@@ -30,7 +30,7 @@ Waltz maintainers provide sample data dumps for Postgres, which can be downloade
 1. Download the `dump_pg_*.zip` file for the latest available release (data dumps from older releases will also work, as the build process will upgrade your database)
 2. Extract the `.sql` file (ususally named `dump.sql`) from the zip
 3. Copy the `dump.sql` file to the `database/postgres` directory
-4. Run the command to create the database, using the `-v` option to mount `database/postgres` to the container's `/docker-entrypoint-initdb.d` directory, so the Postgres can use the `dump.sql` file to initialise your `waltz` database
+4. Run the command to create the database, using the `-v` option to mount `database/postgres` to the container's `/docker-entrypoint-initdb.d` directory, so that Postgres can use the `dump.sql` file to initialise your `waltz` database
 
 > `POSTGRES_USER` must be set to `postgres` for the import to work correctly, as this is what the `dump.sql` file uses
 
