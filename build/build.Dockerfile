@@ -1,17 +1,25 @@
 #
 # step 1: checkout code
 #
-FROM alpine/git as code_checkout
+FROM debian:latest as code_checkout
 
-# specify these using --build-arg these to use a different url/branch(or tag) to build from
+RUN apt-get update && apt-get install -y \
+    git
+
+# specify these using --build-arg to use a different url/branch(or tag) to build from
 ARG git_url=https://github.com/finos/waltz.git
 ARG git_branch=master
-ARG cache_bust_url=https://api.github.com/repos/finos/waltz/commits/${git_branch}
+ARG git_latest_commit_info_url=https://api.github.com/repos/finos/waltz/commits/${git_branch}
 
 WORKDIR /waltz-src
 
 # ensure new code is fetched if anything has changed
-ADD ${cache_bust_url} /tmp/cache_bust
+ADD ${git_latest_commit_info_url} /tmp/git_latest_commit_info
+
+# force git clone even if nothing has changed - pass current timestamp as this build arg's value
+# this will ensure docker doesn't use cache for subsequent steps in this build stage (code_checkout)
+ARG force_build_timestamp="$(date +%s)"
+RUN echo "${force_build_timestamp}"
 
 # fetch code
 RUN git clone --single-branch --depth 1 --branch ${git_branch} ${git_url} .
@@ -77,6 +85,11 @@ WORKDIR /waltz-src
 # copy source code
 COPY --from=code_checkout /waltz-src .
 COPY --from=ui_build /waltz-src/waltz-ng/dist ./waltz-ng/dist
+
+# force mvn clean package even if nothing has changed - pass current timestamp as this build arg's value
+# this will ensure docker doesn't use cache for subsequent steps in this build stage (waltz_build)
+ARG force_build_timestamp="$(date +%s)"
+RUN echo "${force_build_timestamp}"
 
 # build
 RUN mvn clean package -P${maven_profiles} -Dexec.skip=true -DskipTests=${skip_tests}
