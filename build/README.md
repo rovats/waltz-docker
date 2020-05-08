@@ -25,7 +25,7 @@ These arguments can be passed to the `docker build` command when building Waltz,
 | `jooq_pro_version` | Yes, for MSSQL builds | | Should match the version in jOOQ Pro zip file (`jOOQ-<version>.zip`) under `config/maven` directory |
 | `git_url` | No | `https://github.com/finos/waltz.git` | Git repo URL to fetch Waltz code from |
 | `git_branch` | No | `master` | Branch/tag or commit ref to use, in the git repo specified above |
-| `git_latest_commit_info_url` | No | `https://api.github.com/repos/finos/waltz/commits/${git_branch}` | URL that returns info about the latest commit in the specified `git_branch`. This ensures the build process re-runs if any code has changed |
+| `git_latest_commit_info_url` | No | `https://api.github.com/repos`<br>`/finos/waltz/commits/${git_branch}` | URL that returns info about the latest commit in the specified `git_branch`. This ensures the build process re-runs if any code has changed |
 | `force_build_timestamp` | No | | To force the build process to run even if nothing has changed, pass a unique timestamp value, eg: `--build-arg force_build_timestamp=$(date +%s)` |
 | `skip_tests` | No | true | Whether to run tests as part of the maven build process |
 
