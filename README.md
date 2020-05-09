@@ -257,6 +257,8 @@ You can then access Waltz using this URL:
 http://<host_ip>:<host_port>/${context_path}/
 ```
 
+> Default user account created: `admin`, password: `password`
+
 _Template Command_
 ```console
 [user@machine:waltz-docker]$ docker run --rm -it \
