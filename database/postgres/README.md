@@ -36,6 +36,8 @@ Waltz maintainers provide sample data dumps for Postgres, which can be downloade
 
 > Make sure the Postgres version in the command below matches the version in `dump.sql` file (check the line containing: _Dumped from database version_)
 
+> This command must be run from the `waltz-docker` root directory
+
 ```console
 # run the database container in the background
 

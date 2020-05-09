@@ -10,9 +10,9 @@
 - [3: Run Waltz](#3-run-waltz)
   * [Step 1: Create Waltz Properties File](#step-1-create-waltz-properties-file)
   * [Step 2: Create Waltz Logback Config File](#step-2-create-waltz-logback-config-file)
-  * [Step 3: Run](#step-3-run)
+  * [Step 3: Deploy](#step-3-deploy)
     + [Standard Deployment (.war on Tomcat)](#standard-deployment-war-on-tomcat)
-    + [Docker](#docker)
+    + [Docker Deployment](#docker-deployment)
 ---
 
 # 0: Tools Required
@@ -29,6 +29,8 @@ Coming soon
 # 1: Create Database
 ## PostgreSQL, MariaDB or MS SQL Server
 If using an existing database server, create a new empty database, if you don't already have a Waltz database.
+
+> Waltz databse schema is created/updated as part of the build process
 
 Alternatively, to run a containerised database server, see instructions here:
 * [Containerised Waltz Postgres DB](database/postgres/README.md) (also includes instructions for loading sample data)
@@ -50,6 +52,8 @@ The file can also be used for other custom maven settings.
 The build process downloads latest code from [finos/Waltz](https://github.com/finos/waltz) `master` branch by default.  
 This can be overriden by passing a different git url or branch/tag name.  
 See details of all available build arguments [here](build/README.md).
+
+> All commands must be run from the `waltz-docker` root directory
 
 **Template docker command**:
 ```console
@@ -88,7 +92,7 @@ To build Waltz for MSSQL from source, a [jOOQ Pro](https://www.jooq.org/download
 jOOQ Pro maven dependencies need to be dowloaded and installed locally in maven repository.  
 
 **Download jOOQ Pro**   
-Download jOOQ Pro zip file (`jOOQ-<version>.zip`) from jOOQ website and copy the file to `config/maven` directory.  
+Download jOOQ Pro zip file (`jOOQ-<version>.zip`) from [jOOQ website](https://www.jooq.org/download/) and copy the file to `config/maven` directory.  
 Ensure that the version matches the one specified in Waltz code [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml) (see `jooq.version` property).  
 
 > jOOQ provides a 30-day trial for jOOQ Pro, which may be used to build Waltz.  
@@ -144,9 +148,11 @@ Create environment specific logback config files (`waltz-logback-<env>.xml`) und
 >
 >You can also create files for other environments like `waltz-logback-dev.xml`, `waltz-logback-uat.xml`, `waltz-logback-prod.xml`, depending on how many environments you have.
 
-## Step 3: Run
+## Step 3: Deploy
 ### Standard Deployment (.war on Tomcat)
 If you already have an app server like Tomcat set up, you can extract the required artificats from the docker build image `waltz-build` and deploy them in your server:
+
+> All commands must be run from the `waltz-docker` root directory
 
 **Template docker command**:
 ```console
@@ -191,7 +197,9 @@ The above command will copy the deployment artifacts to `build/output/${WALTZ_EN
 >The `.war` file can be placed under Tomcat's `webapps` directory.  
 >The `waltz.properties` and `waltz-logback.xml` files need to be on the classpath, so they can be dropped into the server's `lib` folder.  
 
-### Docker
+### Docker Deployment
+
+> All commands must be run from the `waltz-docker` root directory
 
 ```console
 # build docker image to run Waltz (based on waltz-build image created above)

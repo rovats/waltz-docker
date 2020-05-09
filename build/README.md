@@ -1,6 +1,10 @@
 # Build Waltz
 Build Dockerfile: [build.Dockerfile](build.Dockerfile)
 
+Ensure you have [created a database](../README.md#1-create-database) and [setup maven profiles](../README.md#step-1-setup-maven-profiles) first.
+
+> All commands must be run from the `waltz-docker` root directory
+
 **Template docker command**:
 ```console
 [user@machine:waltz-docker]$ docker build \
