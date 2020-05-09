@@ -155,6 +155,12 @@ If you already have an app server like Tomcat set up, you can extract the requir
 
 > All commands must be run from the `waltz-docker` root directory
 
+The following environment variables can be passed to the `docker run` command using `-e <var_name>=<var_value` docker syntax :  
+| Variable Name | Mandatory | Default Value | Description |
+| ------------- | --------- | ------------- | ----------- |
+| `WALTZ_ENV` | Yes | `local` | This will be used to pick the correct `waltz-<env>.properties` and `waltz-logback-<env>.xml` files from your `config/waltz` directory. Build artifacts will be extracted into: `build/output/${WALTZ_ENV}` directory |
+| `WALTZ_TARGET_DB` | No | Value of ${maven_profiles} build arg | This will be used to name the output `.war` file: `waltz-web.${WALTZ_TARGET_DB}.war` |
+
 **Template docker command**:
 ```console
 # specify target environment and db
