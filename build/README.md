@@ -8,7 +8,6 @@ Ensure you have [created a database](../README.md#1-create-database) and [setup 
 **Template docker command**:
 ```console
 [user@machine:waltz-docker]$ docker build \
---no-cache # optional \
 --tag <image-name>:<image_tag> \
 --build-arg maven_profiles=<profiles> \
 --build-arg <arg2>=<arg2_val> \
@@ -34,5 +33,7 @@ These arguments can be passed to the `docker build` command when building Waltz,
 | `skip_tests` | No | true | Whether to run tests as part of the maven build process |
 
 ## Extract Build Artifacts
+
+Once you have created [waltz properties](../README.md#step-1-create-waltz-properties-file) and [waltz logback config](../README.md#step-2-create-waltz-logback-config-file) files:  
 
 See instructions on how to extract build artifacts for [Standard Deployment (.war on Tomcat)](../README.md#standard-deployment-war-on-tomcat)
