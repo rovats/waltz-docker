@@ -108,7 +108,7 @@ The following additional properties may need to be specified for MSSQL profiles 
 
 **Additional Build Argument**  
 An additional `jooq_pro_version` mandatory build argument needs to be passed for MSSQL builds, which should match the version in jOOQ Pro zip file (`jOOQ-<version>.zip`) under `config/maven` directory.  
-The build process uses this argument to find the correct zip file to install jOOQ dependencies.
+The build process uses this argument to find the correct zip file to automatically install jOOQ dependencies inside the build container's maven repo.
 
 **Examples**
 ```console
