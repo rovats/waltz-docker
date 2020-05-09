@@ -206,18 +206,72 @@ The above command will copy the deployment artifacts to `build/output/${WALTZ_EN
 
 ### Docker Deployment
 
+Once the `waltz-build` docker image is created by the build step, you can easily build and run a docker container to deploy Waltz.
+
+Dockerfile: [run/run.Dockerfile](run/run.Dockerfile)
+
 > All commands must be run from the `waltz-docker` root directory
 
+#### a. Build `waltz-run` Docker Image
+
+This step creates a `waltz-run` docker image by extracting deployable `waltz-web.war` file from the `waltz-build` image and copying it into Tomcat's `webapps` directory inside the `waltz-run` image.  
+This also copies the correct `waltz-<env>.properties` and `waltz-logback-<env>.xml` files from `config/waltz` directory into Tomcat's `lib` directory.
+
+The following arguments can be passed to the `docker build` command when building Waltz, using `--build-arg <arg_name>=<arg_value>` docker syntax:  
+
+| Argument | Mandatory | Default Value | Description |
+| -------- | --------- | ------------- | ----------- |
+| `waltz_env` | Yes | `local` | This will be used to pick the correct `waltz-<env>.properties` and `waltz-logback-<env>.xml` files from your `config/waltz` directory |
+| `waltz_build_tag` | No | `latest` | Specify the tag of the `waltz-build` image to use. In case you maintain different `waltz-build` images, you can use this tag to pick the image to extract artifacts from |
+| `context_path` | No | `waltz` | Use this if you want to customise the context path in your Waltz URL |
+
+_Template Command_
 ```console
-# build docker image to run Waltz (based on waltz-build image created above)
-
-[user@machine:waltz-docker]$ docker build --tag waltz-run:latest --build-arg waltz_build_tag=latest --build-arg waltz_env=local -f run/run.Dockerfile .
-
-# run Waltz in a dockerized Tomcat instance
-
-[user@machine:waltz-docker]$ docker run --rm -it --name waltz-run -it -p 8888:8080 waltz-run:latest
-
-http://localhost:8888/waltz/
+[user@machine:waltz-docker]$ docker build \
+--tag waltz-run:<tag> \
+--build-arg waltz_build_tag=<waltz_build_tag> \
+--build-arg waltz_env=<waltz_env> \
+--build-arg context_path=<context_path> \
+-f run/run.Dockerfile .
 ```
 
-details coming soon
+_Example_
+```console
+[user@machine:waltz-docker]$ docker build \
+--tag waltz-run:latest \
+--build-arg waltz_build_tag=latest \
+--build-arg waltz_env=local \
+--build-arg context_path=waltz \
+-f run/run.Dockerfile .
+```
+
+#### b. Run `waltz-run` Docker Image
+
+This will create a container from the `waltz-run` image and start a Tomcat server with Waltz deployed.
+
+You can then access Waltz using this URL:
+
+```
+http://<host_ip>:<host_port>/${context_path}/
+```
+
+_Template Command_
+```console
+[user@machine:waltz-docker]$ docker run --rm -it \
+--name <container_name> \
+-p <host_port>:8080 \
+waltz-run:<waltz_run_tag>
+```
+
+_Example_
+```console
+# port 8888 on the host machine will point to port 8080 in the container
+# waltz url will be: http://localhost:8888/waltz
+
+[user@machine:waltz-docker]$ docker run --rm -it \
+--name waltz-run \
+-p 8888:8080 \
+waltz-run:latest
+```
+
+> You can also override Tomcat server's config by placing custom config files under [config/tomcat](config/tomcat/README.md) directory.

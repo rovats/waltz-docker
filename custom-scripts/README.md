@@ -6,6 +6,8 @@ You may use it to store custom scripts, frequently used commands etc.
 **Example Script for Postgres**
 
 ```bash
+#!/bin/sh
+
 #
 # build
 #
@@ -16,7 +18,7 @@ docker build \
 -f build/build.Dockerfile .
 
 #
-# extract
+# extract (if deploying in an existing tomcat server)
 #
 docker run --rm \
 -v "$PWD"/build/output:/waltz-build-output \
@@ -25,13 +27,15 @@ docker run --rm \
 waltz-build:latest
 
 #
-# run
+# or deploy in tomcat inside a docker container
 #
 docker build \
 --tag waltz-run:latest \
 --build-arg waltz_build_tag=latest \
 --build-arg waltz_env=local \
 -f run/run.Dockerfile .
+
+docker stop waltz-run 
 
 docker run --rm -it \
 --name waltz-run \
