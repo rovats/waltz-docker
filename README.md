@@ -22,6 +22,7 @@
 * *Optional*: A Postgres (recommended), MariaDB or MSSQL database server (if a standalone database server is required instead of one running in a Docker container)
   * _[jOOQ Pro](https://www.jooq.org/download/)_ to build Waltz from source if using MSSQL
 * *Optional*: A servlet app server like Tomcat (if a standalone server is required instead of one running in a Docker container)
+* *Recommended*: [Cygwin](https://www.cygwin.com/) or a similar tool if using Windows
 
 ## To Develop
 Coming soon
