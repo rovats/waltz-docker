@@ -280,5 +280,6 @@ waltz-run:latest
 
 # Custom Scripts
 Once you've completed the one-off steps of Creating Database(s), Maven Profiles, Waltz Properties and Logback Configuration files, the repeatable process of rebuilding Waltz and extracting or deploying artifacts can be scripted, or you can store your frequently used commands to access them later.  
+
 These can be stored under the [custom-scripts](custom-scripts/README.md) directory.  
 Click the link to view an example script.
