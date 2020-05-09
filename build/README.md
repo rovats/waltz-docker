@@ -33,4 +33,6 @@ These arguments can be passed to the `docker build` command when building Waltz,
 | `force_build_timestamp` | No | | To force the build process to run even if nothing has changed, pass a unique timestamp value, eg: `--build-arg force_build_timestamp=$(date +%s)` |
 | `skip_tests` | No | true | Whether to run tests as part of the maven build process |
 
+## Extract Build Artifacts
 
+See instructions on how to extract build artifacts for [Standard Deployment (.war on Tomcat)](../README.md#standard-deployment-war-on-tomcat)

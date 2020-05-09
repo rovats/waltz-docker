@@ -163,7 +163,7 @@ If you already have an app server like Tomcat set up, you can extract the requir
 -v "$PWD"/config/waltz:/waltz-bin/config \
 -e WALTZ_ENV=<env> \
 -e WALTZ_TARGET_DB=<target-db> \
-<image_name>:<image_tag>
+<waltz_build_image_name>:<image_tag>
 ```
 
 **Examples**:
