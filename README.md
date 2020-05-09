@@ -1,4 +1,4 @@
-# Docker Dev/Build/Run Tools for [Waltz](https://github.com/finos/waltz)
+# Docker Build/Run/Dev Tools for [Waltz](https://github.com/finos/waltz)
 - [0: Tools Required](#0-tools-required)
   * [To Build/Run Waltz](#to-buildrun-waltz)
   * [To Develop](#to-develop)
@@ -25,7 +25,7 @@
 * *Recommended*: [Cygwin](https://www.cygwin.com/) or a similar tool if using Windows
 
 ## To Develop
-Coming soon
+WIP
 
 # 1: Create Database
 ## PostgreSQL, MariaDB or MS SQL Server
