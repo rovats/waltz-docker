@@ -22,6 +22,9 @@ RUN cp /waltz-bin/config/waltz-logback-${waltz_env}.xml ./waltz-logback.xml
 #
 FROM tomcat:8-jdk8-openjdk
 
+# copy any tomcat config file overrides
+COPY config/tomcat /usr/local/tomcat/conf/
+
 # deploy waltz
 COPY --from=get_artifacts /waltz-deployment-artifacts/waltz.properties ./lib/
 COPY --from=get_artifacts /waltz-deployment-artifacts/waltz-logback.xml ./lib/

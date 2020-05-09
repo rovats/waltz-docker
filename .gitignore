@@ -26,7 +26,9 @@ database/postgres/**
 # Config Files
 config/maven/**
 config/waltz/**
+config/tomcat/**
 !config/**/*sample*
+!config/**/README.md
 
 # Build Output
 build/output/**
