@@ -30,7 +30,7 @@ Coming soon
 ## PostgreSQL, MariaDB or MS SQL Server
 If using an existing database server, create a new empty database, if you don't already have a Waltz database.
 
-> Waltz databse schema is created/updated as part of the build process
+> Waltz database schema is created/updated as part of the build process
 
 Alternatively, to run a containerised database server, see instructions here:
 * [Containerised Waltz Postgres DB](database/postgres/README.md) (also includes instructions for loading sample data)
