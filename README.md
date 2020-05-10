@@ -217,7 +217,7 @@ Dockerfile: [run/run.Dockerfile](run/run.Dockerfile)
 This step creates a `waltz-run` docker image by extracting deployable `waltz-web.war` file from the `waltz-build` image and copying it into Tomcat's `webapps` directory inside the `waltz-run` image.  
 This also copies the correct `waltz-<env>.properties` and `waltz-logback-<env>.xml` files from `config/waltz` directory into Tomcat's `lib` directory.
 
-> You can also override Tomcat server's config by placing custom config files under [config/tomcat](config/tomcat/README.md) directory.
+> You can also override Tomcat server's config (eg: `server.xml` etc) by placing these files under [config/tomcat](config/tomcat/README.md) directory.
 
 The following arguments can be passed to the `docker build` command when building Waltz, using `--build-arg <arg_name>=<arg_value>` docker syntax:  
 
