@@ -8,7 +8,7 @@ Ensure you have [created a database](../README.md#1-create-database) and [setup 
 **Template docker command**:
 ```console
 [user@machine:waltz-docker]$ docker build \
---tag <image-name>:<image_tag> \
+--tag waltz-build:<image_tag> \
 --build-arg maven_profiles=<profiles> \
 --build-arg <arg2>=<arg2_val> \
 ...

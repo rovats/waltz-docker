@@ -65,7 +65,7 @@ See details of all available build arguments [here](build/README.md).
 #     deploying liquibase changes to these databases
 
 [user@machine:waltz-docker]$ docker build \
---tag <image-name>:<image_tag> \
+--tag waltz-build:<image_tag> \
 --build-arg maven_profiles=<profiles> \
 -f build/build.Dockerfile .
 ```
@@ -113,8 +113,8 @@ The build process uses this argument to find the correct zip file to automatical
 **Examples**
 ```console
 # template
-docker build \
---tag <image-name>:<image_tag> \
+[user@machine:waltz-docker]$ docker build \
+--tag waltz-build:<image_tag> \
 --build-arg maven_profiles=<profiles> \
 --build-arg jooq_pro_version=<jooq-version> \
 -f build/build.Dockerfile .
@@ -170,7 +170,7 @@ The following environment variables can be passed to the `docker run` command us
 -v "$PWD"/config/waltz:/waltz-bin/config \
 -e WALTZ_ENV=<env> \
 -e WALTZ_TARGET_DB=<target-db> \
-<waltz_build_image_name>:<image_tag>
+waltz-build:<image_tag>
 ```
 
 **Examples**:
