@@ -92,11 +92,11 @@ Once complete, you can either extract the deployable artifacts to deploy them on
 To build Waltz for MSSQL from source, a [jOOQ Pro](https://www.jooq.org/download/) licence is required.  
 jOOQ Pro maven dependencies need to be dowloaded and installed locally in maven repository.  
 
+> jOOQ provides a 30-day trial for jOOQ Pro, which may be used to build Waltz.  
+
 **Download jOOQ Pro**   
 Download jOOQ Pro zip file (`jOOQ-<version>.zip`) from [jOOQ website](https://www.jooq.org/download/) and copy the file to `config/maven` directory.  
-Ensure that the version matches the one specified in Waltz code [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml) (see `jooq.version` property).  
-
-> jOOQ provides a 30-day trial for jOOQ Pro, which may be used to build Waltz.  
+Ensure that the version matches the one specified in Waltz code [waltz-schema/pom.xml](https://github.com/finos/waltz/blob/master/waltz-schema/pom.xml) (see `jooq.version` property). If this is not possible (eg: when using jOOQ Pro trial, an additional property will need to be set under your MSSQL maven profiles, see below).    
 
 The build process will use this zip file to install jOOQ dependencies in the build container's maven repository.
 
@@ -121,9 +121,10 @@ docker build \
 
 # mssql using 'local-mssql' maven profile defined in config/maven/settings.xml
 # and jOOQ version 3.13.1
+
 [user@machine:waltz-docker]$ docker build \
 --tag waltz-build:latest \
---build-arg maven_profiles=waltz-mariadb,local-mariadb \
+--build-arg maven_profiles=waltz-mssql-alt,local-mssql \
 --build-arg jooq_pro_version=3.13.1 \
 -f build/build.Dockerfile .
 ```
