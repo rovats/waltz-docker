@@ -56,6 +56,8 @@ See details of all available build arguments [here](build/README.md).
 
 > All commands must be run from the `waltz-docker` root directory
 
+> Tip: Pass `--build-arg force_build_timestamp=$(date +%s)` to the `docker build` command to force maven build to re-run (otherwise docker will use cached images if no code has changed in the git repo)
+
 **Template docker command**:
 ```console
 # specify maven profiles as an argument (mandatory)
