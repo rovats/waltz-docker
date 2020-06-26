@@ -43,7 +43,11 @@ Alternatively, to run a containerised database server, see instructions here:
 Create a `settings.xml` file under `config/maven/` (you can copy from [config/maven/settings.xml.sample](config/maven/settings.xml.sample))  
 Create Waltz database maven profiles under `config/maven/settings.xml`
 
->If your database runs inside a container, you'll need to set the IP address of the container in your JDBC URL.  
+>If your database runs inside a container on the same host, you'll need to set the IP address of the container in your JDBC URL.  
+>By default, `localhost` will not work, even if you have set up port forwarding.   
+>If port forwarding is set up, you may be be able to use a secial DNS `host.docker.internal` in your JDBC URL to connect to your host machine from within the container.  
+>
+>See [Network Settings](https://docs.docker.com/engine/reference/run/#network-settings) and [Connecting to a service on the host](https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host) for more details.
 >
 >See instructions for [Waltz Postgres DB](database/postgres/README.md), [Waltz MariaDB](database/mariadb/README.md), or [Waltz MSSQL DB](database/mssql/README.md) on how to find database container IP addresses.
 
