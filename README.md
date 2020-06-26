@@ -45,7 +45,7 @@ Create Waltz database maven profiles under `config/maven/settings.xml`
 
 >If your database runs inside a container on the same host, you'll need to set the IP address of the container in your JDBC URL.  
 >By default, `localhost` will not work, even if you have set up port forwarding.   
->If port forwarding is set up, you may be be able to use a secial DNS `host.docker.internal` in your JDBC URL to connect to your host machine from within the container.  
+>If port forwarding is set up, you may be be able to use a secial DNS `host.docker.internal` or IP `172.0.17.1` in your JDBC URL to connect to your host machine from within the build/run containers.  
 >
 >See [Network Settings](https://docs.docker.com/engine/reference/run/#network-settings) and [Connecting to a service on the host](https://docs.docker.com/docker-for-mac/networking/#i-want-to-connect-from-a-container-to-a-service-on-the-host) for more details.
 >
